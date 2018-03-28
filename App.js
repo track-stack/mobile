@@ -1,31 +1,58 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Provider, connect } from 'react-redux'
-import { store } from 'trackstack'
-import TestViewContainer from './lib/components/Admin/TestViewContainer'
+import { store, actions } from 'trackstack'
+import { AppLoading } from 'expo'
+import BaseViewContainer from './lib/components/Base/BaseViewContainer'
+
+const { setAccessToken } = actions.Site
 
 class AppView extends React.Component {
+  state = { attemptedToFetchToken: false }
+
+  constructor(props) {
+    super(props)
+
+    this.fetchTokenFromKeychain = this.fetchTokenFromKeychain.bind(this)
+  }
+
+  async fetchTokenFromKeychain() {
+    return Expo.SecureStore.getItemAsync('ts_access_token', null).then(token => {
+      if (token) {
+        this.props.setAccessToken(token)
+      } else {
+        this.setState({ attemptedToFetchToken: true })
+      }
+    })
+  }
+
   render() {
-    return <TestViewContainer />
+    if (this.props.accessToken || this.state.attemptedToFetchToken) {
+      return <BaseViewContainer />
+    } else {
+      return (
+        <AppLoading
+          startAsync={this.fetchTokenFromKeychain}
+          onFinish={() => {}}
+          onError={console.warn}
+        />
+      )
+    }
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
-
-
 const mapStateToProps = state => {
-  return {}
+  return {
+    accessToken: state.main.accessToken
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {}
+  return {
+    setAccessToken: token => {
+      return dispatch(setAccessToken(token))
+    }
+  }
 }
 
 const ConnectedComponent = connect(

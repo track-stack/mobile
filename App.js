@@ -7,7 +7,7 @@ import BaseViewContainer from './lib/components/Base/BaseViewContainer'
 
 const { setAccessToken } = actions.Site
 
-class AppView  extends React.Component {
+class AppView extends React.Component {
   state = { attemptedToFetchToken: false }
 
   constructor(props) {

@@ -28,18 +28,5 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "trackstack": "0.0.52"
-  },
-  "expo": {
-    "buildNumber", "0.0.1",
-    "facebookAppId": "127379194582876",
-    "name": "TrackStack",
-    "icon": "./assets/icon.png",
-    "version": "0.0.1",
-    "sdkVersion": "0.52.0",
-    "slug": "trackstack",
-    "ios": {
-      "bundleIdentifier": "com.mikekavouras.trackstack"
-    },
-    "orientation": "portrait",
   }
 }

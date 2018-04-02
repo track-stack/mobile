@@ -1,5 +1,14 @@
 {
   "expo": {
-    "sdkVersion": "25.0.0"
+    "sdkVersion": "25.0.0",
+    "facebookAppId": "127379194582876",
+    "name": "TrackStack",
+    "icon": "./assets/icon.png",
+    "version": "0.0.2",
+    "slug": "trackstack",
+    "ios": {
+      "bundleIdentifier": "com.mikekavouras.trackstack"
+    },
+    "orientation": "portrait"
   }
 }

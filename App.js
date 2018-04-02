@@ -7,6 +7,27 @@ import BaseViewContainer from './lib/components/Base/BaseViewContainer'
 
 const { setAccessToken } = actions.Site
 
+import { StackNavigator, addNavigationHelpers } from 'react-navigation'
+import {
+  createReduxBoundAddListener,
+  createReactNavigationReduxMiddleware,
+} from 'react-navigation-redux-helpers';
+
+const AppNavigator = StackNavigator({
+  Base: BaseViewContainer
+});
+const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Base'))
+const navReducer = (state = initialState, action) => {
+  const nextState = AppNavigator.router.getStateForAction(action, state)
+  return nextState || state
+}
+
+const middleware = createReactNavigationReduxMiddleware(
+  "root",
+  state => state.nav
+)
+const addListener = createReduxBoundAddListener("root")
+
 class AppView extends React.Component {
   state = { attemptedToFetchToken: false }
 
@@ -27,8 +48,13 @@ class AppView extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     if (this.props.accessToken || this.state.attemptedToFetchToken) {
-      return <BaseViewContainer />
+      return <AppNavigator navigation={addNavigationHelpers({
+        dispatch: this.props.dispatch,
+        state: this.props.nav,
+        addListener
+      })} />
     } else {
       return (
         <AppLoading
@@ -43,7 +69,8 @@ class AppView extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    accessToken: state.main.accessToken
+    accessToken: state.main.accessToken,
+    nav: state.nav
   }
 }
 
@@ -60,10 +87,11 @@ const ConnectedComponent = connect(
   mapDispatchToProps
 )(AppView)
 
+const finalStore = store({ reducers: {nav: navReducer},middleware: [middleware] })
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={store}>
+      <Provider store={finalStore}>
         <ConnectedComponent />
       </Provider>
     )

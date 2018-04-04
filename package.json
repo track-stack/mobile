@@ -23,10 +23,12 @@
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-facebook-login": "^1.6.0",
+    "react-navigation": "^1.5.9",
+    "react-navigation-redux-helpers": "^1.0.3",
     "react-redux": "^5.0.6",
     "react-redux-router": "^0.0.14",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "trackstack": "0.0.54"
+    "trackstack": "^0.1.0"
   }
 }

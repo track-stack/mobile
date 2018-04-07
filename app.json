@@ -4,9 +4,10 @@
     "facebookAppId": "353243821794524",
     "name": "TrackStack",
     "icon": "./assets/icon.png",
-    "version": "0.0.3",
+    "version": "0.0.2",
     "slug": "trackstack",
     "ios": {
+      "buildNumber": "3",
       "bundleIdentifier": "com.mikekavouras.trackstack"
     },
     "orientation": "portrait"

@@ -7,7 +7,7 @@
     "version": "0.0.2",
     "slug": "trackstack",
     "ios": {
-      "buildNumber": "5",
+      "buildNumber": "6",
       "bundleIdentifier": "com.mikekavouras.trackstack"
     },
     "orientation": "portrait"

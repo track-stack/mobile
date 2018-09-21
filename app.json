@@ -6,6 +6,7 @@
     "icon": "./assets/icon.png",
     "version": "0.0.2",
     "slug": "trackstack",
+    "barStyle": "dark-content",
     "ios": {
       "buildNumber": "15",
       "bundleIdentifier": "com.mikekavouras.trackstack"

@@ -34,6 +34,6 @@
     "react-redux-router": "^0.0.14",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "trackstack": "^0.1.38"
+    "trackstack": "^0.1.41"
   }
 }
